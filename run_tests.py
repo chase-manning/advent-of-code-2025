@@ -21,8 +21,8 @@ def run_test(day: int, part: int, actual: int, expected: int):
 
 def run_all_tests():
     tests_passed = True
-    tests_passed &= run_test(1, 1, day01_part1(), 0)
-    tests_passed &= run_test(1, 2, day01_part2(), 0)
+    tests_passed &= run_test(1, 1, day01_part1(), 1129)
+    tests_passed &= run_test(1, 2, day01_part2(), 6638)
     tests_passed &= run_test(2, 1, day02_part1(), 0)
     tests_passed &= run_test(2, 2, day02_part2(), 0)
     if tests_passed:

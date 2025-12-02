@@ -9,7 +9,3 @@ def part1() -> int:
 def part2() -> int:
     lines = read_lines(2)
     return 0
-
-
-if __name__ == "__main__":
-    test()
