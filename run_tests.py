@@ -1,42 +1,37 @@
 #!/usr/bin/env python3
-"""
-Test runner for all Advent of Code solutions
-"""
 import sys
 import importlib
 from pathlib import Path
+from solutions.day01 import part1 as day01_part1, part2 as day01_part2
+from solutions.day02 import part1 as day02_part1, part2 as day02_part2
+
+
+def run_test(day: int, part: int, actual: int, expected: int):
+    padded_day = f"{day:02d}"
+    padded_part = f"{part:02d}"
+
+    if expected != actual:
+        print(
+            f"Day {padded_day}, Part {padded_part}: Expected {expected}, got {actual} ❌")
+        return False
+    else:
+        print(f"Day {padded_day}, Part {padded_part} passed ✅")
+        return True
 
 
 def run_all_tests():
-    """Run tests for all day solutions"""
-    solutions_dir = Path(__file__).parent / "solutions"
-    test_failed = False
-
-    for day_file in sorted(solutions_dir.glob("day*.py")):
-        if day_file.name == "__init__.py":
-            continue
-
-        module_name = f"solutions.{day_file.stem}"
-        try:
-            module = importlib.import_module(module_name)
-            if hasattr(module, "test"):
-                print(f"\n{'='*50}")
-                print(f"Running tests for {module_name}...")
-                print(f"{'='*50}")
-                module.test()
-            else:
-                print(f"Skipping {module_name} (no test function found)")
-        except Exception as e:
-            print(f"Error testing {module_name}: {e}")
-            import traceback
-            traceback.print_exc()
-            test_failed = True
-
-    if test_failed:
-        print("\n❌ Some tests failed!")
-        sys.exit(1)
+    tests_passed = True
+    tests_passed &= run_test(1, 1, day01_part1(), 0)
+    tests_passed &= run_test(1, 2, day01_part2(), 0)
+    tests_passed &= run_test(2, 1, day02_part1(), 0)
+    tests_passed &= run_test(2, 2, day02_part2(), 0)
+    if tests_passed:
+        print("\n")
+        print("All tests passed ✅")
     else:
-        print("\n✅ All tests passed!")
+        print("\n")
+        print("Some tests failed ❌")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
